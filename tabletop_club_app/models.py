@@ -21,8 +21,24 @@ class BoardGame(models.Model):
         ordering = ['title']
 
     def clean(self):
+        # Enforces rule that minimum players can't be greater than maximum players.
         if self.min_players > self.max_players:
             raise ValidationError("Minimum players cannot be greater than maximum players.")
+    
+    @property
+    def active_rentals_count(self):
+        # Counts the number of rentals of a game that have not been returned. Used to calculate the available copies remaining.
+        return self.rentals.filter(date_returned__isnull=True).count()
+    
+    @property
+    def available_copies(self):
+        # Calculates the available copies of a game remaining. Used to determine if a game is available to rent.
+        return self.quantity - self.active_rentals_count
+
+    @property
+    def is_available(self):
+        # Determines if a game is available. Used to disable the "rent game" button while there are no copies remaining.
+        return self.avaialble_copies > 0
     
     def __str__(self):
         return self.title
@@ -43,8 +59,27 @@ class Rental(models.Model):
         super().save(*args, **kwargs)
     
     def clean(self):
+        # Enforces rule that the date a game is returned can't be earlier than the date it was rented.
         if self.date_returned and self.date_returned < self.date_rented:
             raise ValidationError("Date returned cannot be earlier than date rented.")
+
+        #  Enforces rule that a rental can't be created if no copies of the game are available.
+        active_rentals_for_game = Rental.objects.filter(board_game=self.board_game, date_returned__isnull=True)
+            # Checks to see if the object already exists to prevent counting it as another active rental during editing.
+        if self.pk:
+            active_rentals_for_game = active_rentals_for_game.exclude(pk=self.pk)
+        
+        if active_rentals_for_game.count() >= self.board_game.quantity:
+            raise ValidationError("No copies of this game are currently available.")
+        
+        # Enforces rule that a user cannot have more than 3 concurrent rentals.
+        active_rentals_for_user = Rental.objects.filter(borrower=self.borrower, date_returned__isnull=True)
+            # Checks to see if the object already exists to prevent counting it as another active rental during editing.
+        if self.pk:
+            active_rentals_for_user = active_rentals_for_user.exclude(pk=self.pk)
+
+        if active_rentals_for_user.count() >= 3:
+            raise ValidationError("A user may have at most 3 concurrent rentals.")
 
     def __str__(self):
         return f'{self.borrower} - {self.board_game.title}'
