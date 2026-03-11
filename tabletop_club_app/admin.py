@@ -7,7 +7,7 @@ class BoardGameAdmin(admin.ModelAdmin):
     list_filter = ('category',)
 
 class RentalAdmin(admin.ModelAdmin):
-    list_display = ('borrower', 'board_game', 'date_rented' ,'due_date', 'date_returned')
+    list_display = ('borrower', 'board_game', 'date_rented' ,'due_date')
     search_fields = ('borrower', 'board_game')
     list_filter = ('borrower', 'board_game')
 

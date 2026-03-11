@@ -20,15 +20,10 @@ class BoardGame(models.Model):
     class Meta:
         ordering = ['title']
 
-    def clean(self):
-        # Enforces rule that minimum players can't be greater than maximum players.
-        if self.min_players > self.max_players:
-            raise ValidationError("Minimum players cannot be greater than maximum players.")
-    
     @property
     def active_rentals_count(self):
         # Counts the number of rentals of a game that have not been returned. Used to calculate the available copies remaining.
-        return self.rentals.filter(date_returned__isnull=True).count()
+        return self.rentals.count()
     
     @property
     def available_copies(self):
@@ -38,7 +33,12 @@ class BoardGame(models.Model):
     @property
     def is_available(self):
         # Determines if a game is available. Used to disable the "rent game" button while there are no copies remaining.
-        return self.avaialble_copies > 0
+        return self.available_copies > 0
+
+    def clean(self):
+        # Enforces rule that minimum players can't be greater than maximum players.
+        if self.min_players > self.max_players:
+            raise ValidationError("Minimum players cannot be greater than maximum players.")
     
     def __str__(self):
         return self.title
@@ -48,10 +48,14 @@ class Rental(models.Model):
     board_game = models.ForeignKey(BoardGame, on_delete=models.PROTECT, related_name='rentals')
     date_rented = models.DateField(default=timezone.localdate)
     due_date = models.DateField(editable=False)
-    date_returned = models.DateField(blank=True, null=True)
 
     class Meta:
         ordering = ['-date_rented']
+
+    @property
+    def is_overdue(self):
+        # Determines if a board game is overdue.
+        return timezone.localdate() > self.due_date
 
     def save(self, *args, **kwargs):
         # Automatically sets the due date to 7 days after the rental date.
@@ -59,12 +63,8 @@ class Rental(models.Model):
         super().save(*args, **kwargs)
     
     def clean(self):
-        # Enforces rule that the date a game is returned can't be earlier than the date it was rented.
-        if self.date_returned and self.date_returned < self.date_rented:
-            raise ValidationError("Date returned cannot be earlier than date rented.")
-
         #  Enforces rule that a rental can't be created if no copies of the game are available.
-        active_rentals_for_game = Rental.objects.filter(board_game=self.board_game, date_returned__isnull=True)
+        active_rentals_for_game = Rental.objects.filter(board_game=self.board_game)
             # Checks to see if the object already exists to prevent counting it as another active rental during editing.
         if self.pk:
             active_rentals_for_game = active_rentals_for_game.exclude(pk=self.pk)
@@ -73,13 +73,24 @@ class Rental(models.Model):
             raise ValidationError("No copies of this game are currently available.")
         
         # Enforces rule that a user cannot have more than 3 concurrent rentals.
-        active_rentals_for_user = Rental.objects.filter(borrower=self.borrower, date_returned__isnull=True)
+        active_rentals_for_user = Rental.objects.filter(borrower=self.borrower)
             # Checks to see if the object already exists to prevent counting it as another active rental during editing.
         if self.pk:
             active_rentals_for_user = active_rentals_for_user.exclude(pk=self.pk)
 
         if active_rentals_for_user.count() >= 3:
             raise ValidationError("A user may have at most 3 concurrent rentals.")
+
+        # Enforces rule that a user cannot rent two copies of the same game concurrently.    
+        duplicate_rental = Rental.objects.filter(
+            borrower=self.borrower,
+            board_game=self.board_game,
+            )
+        if self.pk:
+            duplicate_rental = duplicate_rental.exclude(pk=self.pk)
+        
+        if duplicate_rental.exists():
+            raise ValidationError("You already have this game rented.")
 
     def __str__(self):
         return f'{self.borrower} - {self.board_game.title}'
