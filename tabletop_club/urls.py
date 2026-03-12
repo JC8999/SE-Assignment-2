@@ -16,7 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from tabletop_club_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home_admin, name='home_admin'),
+    path('member_home', views.home_member, name='home_member'),
+    path('game_catalogue', views.game_catalogue, name='game_catalogue'),
+    path('members', views.members, name='members'),
+    path('rentals', views.rentals, name='rentals'),
+    path('my_rentals', views.my_rentals, name='my_rentals'),
 ]
