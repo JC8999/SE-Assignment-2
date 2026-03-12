@@ -33,10 +33,8 @@ if not SECRET_KEY:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
-
-if not ALLOWED_HOSTS or ALLOWED_HOSTS == ['']:
-    raise ValueError('ALLOWED_HOSTS is missing! Set ALLOWED_HOSTS in environment variables.')
+ALLOWED_HOSTS = ['se-assignment-2.onrender.com',
+                 '127.0.0.1']
 
 
 # Application definition
