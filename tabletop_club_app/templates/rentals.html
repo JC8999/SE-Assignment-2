@@ -3,5 +3,39 @@
 {% block title %}Rentals{% endblock %}
 
 {% block content %}
-<h1>Test</h1>
+<div class="container">
+        <div class="rentals">
+            <div class="rental_header_table d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                <h3 class="mb-0">Active Rentals</h3>
+            </div>
+    {% if rentals %}
+        <div class="rental_body_table">
+            <table class="table-pa align-middle">
+                <thead>
+                    <tr>
+                        <th>Borrower</th>
+                        <th>Game</th>
+                        <th>Date Rented</th>
+                        <th>Due Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <!-- Display records in the 'users' database  -->
+                    {% for rental in rentals %}
+                        <tr>
+                            <td>{{ rental.borrower }}</td>
+                            <td>{{ rental.board_game }}</td>
+                            <td>{{ rental.date_rented }}</td>
+                            <td>{{ rental.due_date }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        <!-- No records clause  -->
+        {% else %}
+            <p class="text-muted mb-0">No rentals found.</p>
+        {% endif %}
+        </div>
+    </div>
 {% endblock %}

@@ -3,5 +3,41 @@
 {% block title %}Game Catalogue{% endblock %}
 
 {% block content %}
-<h1>Test</h1>
+<div class="container">
+        <div class="board-games">
+            <div class="game_header_table d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                <h3 class="mb-0">Board Games</h3>
+            </div>
+    {% if games %}
+        <div class="game_body_table">
+            <table class="table-pa align-middle">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Players</th>
+                        <th>Playtime</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <!-- Display records in the 'board game' database  -->
+                    {% for game in games %}
+                        <tr>
+                            <td>{{ game.title }}</td>
+                            <td>{{ game.category }}</td>
+                            <td>{{ game.min_players }} - {{ game.max_players }}</td>
+                            <td>{{ game.playtime_minutes }} minutes</td>
+                            <td>{{ game.quantity }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        <!-- No records clause  -->
+        {% else %}
+            <p class="text-muted mb-0">No games found.</p>
+        {% endif %}
+        </div>
+    </div>
 {% endblock %}

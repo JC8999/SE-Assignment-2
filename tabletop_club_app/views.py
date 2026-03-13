@@ -1,4 +1,6 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render
+from .models import BoardGame, Rental
 
 # Create your views here.
 def home_admin(request):
@@ -8,13 +10,16 @@ def home_member(request):
     return render(request, 'home_member.html')
 
 def game_catalogue(request):
-    return render(request, 'game_catalogue.html')
+    game_list = BoardGame.objects.all().order_by('title')
+    return render(request, 'game_catalogue.html', {'games': game_list})
 
 def members(request):
-    return render(request, 'members.html')
+    member_list = User.objects.filter(is_staff=False)
+    return render(request, 'members.html', {'members': member_list})
 
 def rentals(request):
-    return render(request, 'rentals.html')
+    rental_list = Rental.objects.all().order_by('date_rented')
+    return render(request, 'rentals.html', {'rentals': rental_list})
 
 def my_rentals(request):
     return render(request, 'my_rentals.html')
