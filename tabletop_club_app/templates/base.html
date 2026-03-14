@@ -9,7 +9,62 @@
         </title>
     </head>
     <body>
-        {% block content %}
-        {% endblock %}
+        <!-- Main layout -->
+        <div class="container-fluid">
+        <div class="row">
+
+            <!-- Desktop sidebar -->
+            <div class="col-auto d-none d-lg-flex p-0">
+                <div class="d-flex flex-column sidebar-desktop bg-light border-end p-3">
+
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="container-fluid">The Tabletop Club</div>
+                    </div>
+
+                    <hr>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a class="nav-link link-dark" href="/">
+                                <i class="me-2"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link link-dark" href="/members">
+                                <i class="me-2"></i> Members
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link link-dark" href="/game_catalogue">
+                                <i class="me-2"></i> Game Catalogue
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link link-dark" href="/rentals">
+                                <i class="me-2"></i> Rentals
+                            </a>
+                        </li>
+                    </ul>
+
+                    <hr>
+                    <div class="text-muted small container-fluid">Logout</div>
+
+                    </div>
+                </div>
+
+                <!-- Main content -->
+                    <div class="main_body col p-4">
+                        <div class="container-fluid">
+                            <div class="container-fluid">
+                                <header class="mb-3 text-center">
+                                    <h1 class="display-6"><strong>{% block header %}{% endblock %}</strong></h1>
+                                </header>
+                            </div>
+                            <main>
+                                {% block content %}{% endblock %}
+                            </main>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </body>
 </html>
