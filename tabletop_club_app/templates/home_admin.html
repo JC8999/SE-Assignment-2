@@ -1,7 +1,67 @@
 {% extends 'base.html' %}
 
 {% block title %}Admin Home{% endblock %}
+{% block header %}The Tabletop Club Admin Home Page{% endblock %}
 
-{% block content %}
-<h1>Test</h1>
+{% block content %} 
+<div class="container">
+
+    <div class="row mb-4">
+        <div class="text-home"> 
+            <h5 class="pt-4">
+                <strong>Welcome to the Tabletop Club!</strong>
+            </h5>
+            <p class="home text-muted text-justify-custom pt-2"> 
+                This is the admin dashboard. From here, you are able to view and manage club members, board games, and active rentals. 
+                Click on the links to get started.
+            </p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Member Card -->
+        <div class="col-md-4">
+            <div class="admin-card">
+                <div class="admin-card-body">
+                    <h5 class="card-title">Members</h5>
+                    <p class="card-text">
+                        Go to the members list to view all current members, add new ones,
+                        or edit and delete existing members.
+                    </p>
+                </div>
+                <a href="/members" class="admin-card-button">View Members &gt;</a>
+            </div>
+        </div>
+
+        <!-- Game Catalogue Card -->
+        <div class="col-md-4">
+            <div class="admin-card">
+                <div class="admin-card-body">
+                    <h5 class="card-title">Game Catalogue</h5>
+                    <p class="card-text">
+                        Go to the game catalogue to view the available games, add new ones,
+                        or edit and delete existing games.
+                    </p>
+                </div>
+                <a href="/game_catalogue" class="admin-card-button">View Game Catalogue &gt;</a>
+            </div>
+        </div>
+
+        <!-- Rentals Card -->
+        <div class="col-md-4">
+            <div class="admin-card">
+                <div class="admin-card-body">
+                    <h5 class="card-title">Active Rentals</h5>
+                    <p class="card-text">
+                        Go to the active rentals to view all ongoing rentals from all members.
+                    </p>
+                </div>
+                <a href="/rentals" class="admin-card-button">View Rentals &gt;</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 {% endblock %}

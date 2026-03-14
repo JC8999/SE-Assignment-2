@@ -1,0 +1,236 @@
+/* ====== GLOBAL ====== */
+:root {
+/* reusable base to define colour scheme */
+    --bg: #F6F3EA;
+    --card: #FFFFFF;
+    --primary: #1F5F8A; /* used for main UI elements */
+    --secondary: #6BAED6; /* used for interactions such as hover*/
+    --success: #2E8B57; /* used for positive actions such as confirmation */
+    --success-secondary: #246C44; /* used for interactions such as hover */
+    --danger: #E63946; /* used for destructive actions such as deletion and overdue */
+    --danger-secondary: #C52834; /* used for interactions such as hover */
+    --text: #2B2B2B;
+    --shadow: 0 6px 12px rgba(0,0,0,0.12);
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    color: var(--text);
+    background: var(--bg);
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: "Fredoka", sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.text-home h5 {
+/* custom styling for header on home pages */ 
+    font-family: "Fredoka", sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.card-title {
+    font-family: "Fredoka", sans-serif;
+}
+
+/* ======= SIDEBAR LAYOUT ====== */
+.sidebar-desktop,
+.sidebar-mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1050;
+}
+
+/* Large desktop */
+@media (min-width: 1400px) {
+
+    .sidebar-desktop {
+        width: 320px;
+    }
+
+    .main_body {
+        margin-left: 320px;
+    }
+}
+
+/* Medium desktop */
+@media (min-width: 1200px) and (max-width: 1399px){
+
+    .sidebar-desktop {
+        width: 280px;
+    }
+
+    .main_body {
+        margin-left: 280px;
+    }
+}
+
+/* Small desktop */
+@media (min-width: 992px) and (max-width: 1200px) {
+
+    .sidebar-desktop {
+        width: 240px;
+    }
+
+    .main_body {
+        margin-left: 240px;
+    }
+}
+
+/* ======  TABLES ====== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--card);
+    color: var(--text-main);
+    border: 2px solid var(--primary);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+th,
+td {
+    padding: 1rem;
+    text-align: left;
+    vertical-align: middle;
+}
+
+td {
+    min-height: 36px;
+}
+
+thead {
+    background-color: var(--primary);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+thead th {
+    color: #ffffff;
+    font-family: "Fredoka", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-bottom: 2px solid var(--primary);
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(42, 111, 151, 0.06);
+}
+
+tbody tr:hover {
+    background-color: rgba(62, 152, 255, 0.183);
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* ====== RECORD CONTAINERS ====== */
+/* used for styling the various record tables */
+.game_body_table,
+.member_body_table,
+.rental_body_table {
+    width: 95%;
+    background-color: var(--card);
+    border-radius: .6rem;
+    margin: .8rem auto;
+    overflow: auto;
+    max-height: 60vh;
+}
+
+.game_body_table table,
+.member_body.table,
+.rental_body_table table {
+    min-width: 700px;
+    width: 100%;
+}
+
+.game_body_table th,
+.game_body_table td,
+.member_body_table th,
+.member_body_table td,
+.rental_body_table th,
+.rental_body_table td {
+    min-width: 120px;
+    white-space: nowrap;
+}
+
+/* last column is wider for action buttons */
+.game_body_table th:last-child,
+.game_body_table td:last-child,
+.member_body_table th:last-child,
+.member_body_table td:last-child,
+.rental_body_table th:last-child,
+.rental_body_table td:last-child {
+    min-width: 200px;
+}
+
+/* ====== HOME PAGE CARDS ====== */
+.admin-card {
+    border: 3px solid var(--primary);
+    border-radius: 14px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    min-height: 320px;
+    height: 100%;
+}
+
+.admin-card-body {
+    padding: 24px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-card .card-title {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--primary);
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--primary);
+}
+
+.admin-card .card-text {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 0;
+    padding: 0 10px;
+}
+
+.admin-card-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 16px;
+    text-decoration: none;
+    background-color: var(--primary);
+    color: #ffffff;
+    font-weight: 600;
+    border-top: 3px solid var(--primary);
+    margin: 0;
+}
+
+.admin-card-button:hover {
+    background-color: var(--secondary);
+}

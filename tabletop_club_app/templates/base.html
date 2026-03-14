@@ -1,70 +1,67 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
 
+        <!-- CSS Stylesheet -->
+        <link rel="stylesheet" href="{% static 'stylesheet.css' %}"/>
+
+        <!-- Fonts -->
+        <link rel ="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Inter:wght@400;500;600&display=swap">
+
+        <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
         <title>{% block title %}{% endblock %}
         </title>
     </head>
     <body>
-        <!-- Main layout -->
         <div class="container-fluid">
         <div class="row">
 
-            <!-- Desktop sidebar -->
-            <div class="col-auto d-none d-lg-flex p-0">
-                <div class="d-flex flex-column sidebar-desktop bg-light border-end p-3">
+    <!-- Desktop sidebar -->
+    <div class="d-none d-lg-flex p-0">
+        <div class="d-flex flex-column sidebar-desktop bg-light border-end p-3" style="width: 250px;">
 
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="container-fluid">The Tabletop Club</div>
-                    </div>
-
-                    <hr>
-                    <ul class="nav nav-pills flex-column mb-auto">
-                        <li class="nav-item">
-                            <a class="nav-link link-dark" href="/">
-                                <i class="me-2"></i> Home
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link link-dark" href="/members">
-                                <i class="me-2"></i> Members
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link link-dark" href="/game_catalogue">
-                                <i class="me-2"></i> Game Catalogue
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link link-dark" href="/rentals">
-                                <i class="me-2"></i> Rentals
-                            </a>
-                        </li>
-                    </ul>
-
-                    <hr>
-                    <div class="text-muted small container-fluid">Logout</div>
-
-                    </div>
-                </div>
-
-                <!-- Main content -->
-                    <div class="main_body col p-4">
-                        <div class="container-fluid">
-                            <div class="container-fluid">
-                                <header class="mb-3 text-center">
-                                    <h1 class="display-6"><strong>{% block header %}{% endblock %}</strong></h1>
-                                </header>
-                            </div>
-                            <main>
-                                {% block content %}{% endblock %}
-                            </main>
-                        </div>
-                    </div>
-                </div>
+            <div class="text-center mb-3">
+                <div class="fw-bold fs-4">The Tabletop Club</div>
             </div>
+
+            <hr>
+
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a class="nav-link link-dark" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-dark" href="/members">Members</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-dark" href="/game_catalogue">Game Catalogue</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-dark" href="/rentals">Rentals</a>
+                </li>
+            </ul>
+
+            <hr>
+            <div class="text-muted small">Logout</div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="main_body col p-4">
+        <div class="container-fluid">
+            <header class="mb-3 text-center">
+                <h1 class="display-6"><strong>{% block header %}{% endblock %}</strong></h1>
+            </header>
+            <main>
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+    </div>
+    </div>
+    </div>
     </body>
 </html>
