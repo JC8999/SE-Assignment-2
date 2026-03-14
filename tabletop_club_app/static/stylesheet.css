@@ -176,7 +176,8 @@ tbody tr:last-child {
 }
 
 /* ====== HOME PAGE CARDS ====== */
-.admin-card {
+.admin-card,
+.member-card {
     border: 3px solid var(--primary);
     border-radius: 14px;
     background: var(--card);
@@ -189,14 +190,16 @@ tbody tr:last-child {
     height: 100%;
 }
 
-.admin-card-body {
+.admin-card-body,
+.member-card-body {
     padding: 24px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
-.admin-card .card-title {
+.admin-card .card-title,
+.member-card .card-title {
     text-align: center;
     font-size: 1.4rem;
     font-weight: 700;
@@ -207,7 +210,8 @@ tbody tr:last-child {
     border-bottom: 2px solid var(--primary);
 }
 
-.admin-card .card-text {
+.admin-card .card-text,
+.member-card .card-text {
     flex-grow: 1;
     display: flex;
     align-items: center;
@@ -217,7 +221,8 @@ tbody tr:last-child {
     padding: 0 10px;
 }
 
-.admin-card-button {
+.admin-card-button,
+.member-card-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -231,6 +236,7 @@ tbody tr:last-child {
     margin: 0;
 }
 
-.admin-card-button:hover {
+.admin-card-button:hover,
+.member-card-button:hover {
     background-color: var(--secondary);
 }

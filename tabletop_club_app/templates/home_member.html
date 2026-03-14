@@ -1,7 +1,52 @@
 {% extends 'base.html' %}
 
 {% block title %}Member Home{% endblock %}
+{% block header %}The Tabletop Club Member Home Page{% endblock %}
 
-{% block content %}
-<h1>Test</h1>
+{% block content %} 
+<div class="container">
+
+    <div class="row mb-4">
+        <div class="text-home"> 
+            <h5 class="pt-4">
+                <strong>Welcome to the Tabletop Club!</strong>
+            </h5>
+            <p class="home text-muted text-justify-custom pt-2"> 
+                This is the club member dashboard. From here, you are able to view our selection of board games and rent up to 3 of them at a time. 
+                You can also view and manage your active rentals with us. Click on the links to get started.
+            </p>
+        </div>
+    </div>
+
+    <div class="row g-2 justify-content-center">
+
+        <!-- Game Catalogue Card -->
+        <div class="col-md-4">
+            <div class="member-card">
+                <div class="member-card-body">
+                    <h5 class="card-title">Game Catalogue</h5>
+                    <p class="card-text">
+                        Go to the game catalogue to view the available games and rent your favourites. maximum of 3 unique games can be rented at a time.
+                    </p>
+                </div>
+                <a href="/game_catalogue" class="member-card-button">View Game Catalogue &gt;</a>
+            </div>
+        </div>
+
+        <!-- Rentals Card -->
+        <div class="col-md-4">
+            <div class="member-card">
+                <div class="member-card-body">
+                    <h5 class="card-title">My Rentals</h5>
+                    <p class="card-text">
+                        Go to My Rentals to view all of your active rentals along with their due dates. From here, you can return any active rentals you may have.
+                    </p>
+                </div>
+                <a href="/my_rentals" class="member-card-button">View Rentals &gt;</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 {% endblock %}
