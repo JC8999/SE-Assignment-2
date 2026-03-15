@@ -31,30 +31,54 @@
 
                 <div class="offcanvas-body pt-0 d-flex flex-column">
                     <ul class="sidebar-nav">
+                        <!-- Different Home links depending on if member or admin is logged in. -->
                         <li>
-                            <a class="sidebar-link" href="/">
+                            {% if user.is_staff %}
+                            <a class="sidebar-link" href="/admin_home">
+                            {% else %}
+                            <a class="sidebar-link" href="/member_home">
+                            {% endif %}
                                 <i class="fa-solid fa-house"></i>
                                 <span>Home</span>
                             </a>
                         </li>
+                        
+                        <!-- User must be an admin to access members -->
+                        {% if user.is_staff %}
                         <li>
                             <a class="sidebar-link" href="/members">
                                 <i class="fa-solid fa-users"></i>
                                 <span>Members</span>
                             </a>
                         </li>
+                        {% endif %}
+                        
                         <li>
                             <a class="sidebar-link" href="/game_catalogue">
                                 <i class="fa-solid fa-dice"></i>
                                 <span>Game Catalogue</span>
                             </a>
                         </li>
+
+                        <!-- User must be an admin to access rentals -->
+                        {% if user.is_staff %}
                         <li>
                             <a class="sidebar-link" href="/rentals">
                                 <i class="fa-solid fa-box"></i>
                                 <span>Rentals</span>
                             </a>
                         </li>
+                        {% endif %}
+
+                        <!-- User must be a member to access my rentals -->
+                        {% if not user.is_staff %}
+                        <li>
+                            <a class="sidebar-link" href="/my_rentals">
+                                <i class="fa-solid fa-box"></i>
+                                <span>My Rentals</span>
+                            </a>
+                        </li>
+                        {% endif %}
                     </ul>
 
                     <hr>
@@ -97,30 +121,54 @@
                         <hr>
 
                         <ul class="sidebar-nav">
+                            <!-- Different Home links depending on if member or admin is logged in. -->
                             <li>
-                                <a class="sidebar-link" href="/">
+                                {% if user.is_staff %}
+                                <a class="sidebar-link" href="/admin_home">
+                                {% else %}
+                                <a class="sidebar-link" href="/member_home">
+                                {% endif %}
                                     <i class="fa-solid fa-house"></i>
                                     <span>Home</span>
                                 </a>
                             </li>
+                            
+                            <!-- User must be an admin to access members -->
+                            {% if user.is_staff %}
                             <li>
                                 <a class="sidebar-link" href="/members">
                                     <i class="fa-solid fa-users"></i>
                                     <span>Members</span>
                                 </a>
                             </li>
+                            {% endif %}
+
                             <li>
                                 <a class="sidebar-link" href="/game_catalogue">
                                     <i class="fa-solid fa-dice"></i>
                                     <span>Game Catalogue</span>
                                 </a>
                             </li>
+
+                            <!-- User must be an admin to access rentals -->
+                            {% if user.is_staff %}
                             <li>
                                 <a class="sidebar-link" href="/rentals">
                                     <i class="fa-solid fa-box"></i>
                                     <span>Rentals</span>
                                 </a>
                             </li>
+                            {% endif %}
+
+                            <!-- User must be a member to access my rentals -->
+                            {% if not user.is_staff %}
+                            <li>
+                                <a class="sidebar-link" href="/my_rentals">
+                                    <i class="fa-solid fa-box"></i>
+                                    <span>My Rentals</span>
+                                </a>
+                            </li>
+                            {% endif %}
                         </ul>
 
                         <hr>
