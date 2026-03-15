@@ -25,73 +25,99 @@
 
     <!-- Desktop sidebar -->
     <div class="d-none d-lg-flex p-0">
-        <div class="d-flex flex-column sidebar-desktop bg-light border-end p-3" style="width: 250px;">
+        <div class="sidebar-desktop">
 
-            <div class="text-center mb-3">
-                <div class="fw-bold fs-4">The Tabletop Club</div>
+            <div class="sidebar-header">
+                <div class="sidebar-title">The Tabletop Club</div>
             </div>
 
             <hr>
 
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a class="nav-link link-dark" href="/">Home</a>
+            <ul class="sidebar-nav">
+                <li>
+                    <a class="sidebar-link" href="/">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Home</span>
+                    </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link link-dark" href="/members">Members</a>
+                <li>
+                    <a class="sidebar-link" href="/members">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Members</span>
+                    </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link link-dark" href="/game_catalogue">Game Catalogue</a>
+                <li>
+                    <a class="sidebar-link" href="/game_catalogue">
+                        <i class="fa-solid fa-dice"></i>
+                        <span>Game Catalogue</span>
+                    </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link link-dark" href="/rentals">Rentals</a>
+                <li>
+                    <a class="sidebar-link" href="/rentals">
+                        <i class="fa-solid fa-box"></i>
+                        <span>Rentals</span>
+                    </a>
                 </li>
             </ul>
 
             <hr>
+            <!-- Replace with login functionality when implemented -->
             <div class="text-muted small">Logout</div>
+        </div>
         </div>
     </div>
 
     <!-- Mobile offcanvas sidebar -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel" style="max-width: 250px;">
+        <div class="offcanvas offcanvas-start sidebar-mobile" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
             <div class="d-flex flex-column h-100">
-                <div class="offcanvas-header">
+
+                <div class="offcanvas-header mobile-sidebar-header">
+                    <div class="sidebar-title">The Tabletop Club</div>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
 
-                <hr>
-
                 <div class="offcanvas-body pt-0 d-flex flex-column">
-                    <ul class="nav nav-pills flex-column mb-auto">
-                        <li class="nav-item">
-                            <a class="nav-link link-dark" href="/">
+                    <ul class="sidebar-nav">
+                        <li>
+                            <a class="sidebar-link" href="/">
+                                <i class="fa-solid fa-house"></i>
+                                <span>Home</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link link-dark" href="/members">Members</a>
+                        <li>
+                            <a class="sidebar-link" href="/members">
+                                <i class="fa-solid fa-users"></i>
+                                <span>Members</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link link-dark" href="/game_catalogue">Game Catalogue</a>
+                        <li>
+                            <a class="sidebar-link" href="/game_catalogue">
+                                <i class="fa-solid fa-dice"></i>
+                                <span>Game Catalogue</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link link-dark" href="/rentals">Rentals</a>
-                        </li>
-                    </ul>
+                        <li>
+                            <a class="sidebar-link" href="/rentals">
+                            <i class="fa-solid fa-box"></i>
+                            <span>Rentals</span>
+                        </a>
+                    </li>
+                </ul>
 
-                    <hr class="mt-auto">
-                    <div class="text-muted small">Logout</div>
+                <hr>
+                <!-- Replace with login functionality when implemented -->
+                <div class="text-muted small">Logout</div>
                 </div>
             </div>
         </div>
 
     <!-- Mobile toggle navbar -->
-    <nav class="navbar bg-light border-bottom d-lg-none">
+    <nav class="navbar mobile-topbar d-lg-none">
         <div class="container-fluid">
-            <button class="btn btn-outline-secondary" type="button"
-                    data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas"
-                    aria-controls="sidebarOffcanvas" aria-label="Open menu">
-                <i class="fa-solid fa-bars"></i>
+            <button class="btn mobile-menu-btn" type="button"
+                data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas"
+                aria-controls="sidebarOffcanvas" aria-label="Open menu">
+            <i class="fa-solid fa-bars"></i>
             </button>
         </div>
     </nav>

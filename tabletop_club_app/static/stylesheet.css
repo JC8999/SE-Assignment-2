@@ -85,6 +85,108 @@ h1, h2, h3, h4, h5 {
     }
 }
 
+/* ====== SIDEBAR ====== */
+/* Sidebar container */
+.sidebar-desktop {
+    width: 250px;
+    height: 100vh;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 15px;
+}
+
+/* Header */
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Navigation container */
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+
+/* Links */
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    text-decoration: none;
+    color: #d1d5db;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.sidebar-link:hover {
+    background: var(--secondary);
+    color: white;
+    transform: translateX(4px);
+}
+
+/* Icons */
+.sidebar-link i {
+    width: 18px;
+    text-align: center;
+}
+
+/* Footer section */
+.sidebar-footer {
+    margin-top: auto;
+}
+
+/* Logout link */
+.logout-link:hover {
+    background: var(--danger-secondary);
+}
+
+/* Mobile offcanvas */
+.sidebar-mobile {
+    max-width: 250px;
+    background: var(--primary);
+    color: white;
+}
+
+.sidebar-mobile .offcanvas-header,
+.sidebar-mobile .offcanvas-body {
+    background: var(--primary);
+    color: white;
+}
+
+.sidebar-mobile-header {
+    border-bottom: 1px solid #374151;
+    padding: 20px 16px 16px;
+}
+
+/* Mobile top navbar */
+.mobile-topbar {
+    background: var(--primary);
+    padding: 10px 12px;
+}
+
+.mobile-topbar .mobile-menu-btn {
+    color: white;
+    background: transparent;
+}
+
+.mobile-topbar .mobile-menu-btn:hover {
+    background: var(--secondary);
+    color: white;
+}
+
 /* ======  TABLES ====== */
 table {
     width: 100%;
