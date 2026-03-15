@@ -153,6 +153,17 @@ h1, h2, h3, h4, h5 {
     background: var(--danger-secondary);
 }
 
+/* logout button */
+.logout-button {
+    background: none;
+    border: none;
+    padding: 0;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
 /* Mobile offcanvas */
 .sidebar-mobile {
     max-width: 250px;

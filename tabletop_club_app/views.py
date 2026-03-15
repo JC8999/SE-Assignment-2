@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from .models import BoardGame, Rental
 
 # Create your views here.
@@ -23,3 +25,14 @@ def rentals(request):
 
 def my_rentals(request):
     return render(request, 'my_rentals.html')
+
+class CustomLoginView(LoginView):
+    template_name="login.html"
+
+    def get_success_url(self):
+        user=self.request.user
+
+        if user.is_staff:
+            return reverse_lazy('home_admin')
+        
+        return reverse_lazy('home_member')
