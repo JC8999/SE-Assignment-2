@@ -1,31 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from .models import BoardGame, Rental
 
 # Create your views here.
-def home_admin(request):
-    return render(request, 'home_admin.html')
-
-def home_member(request):
-    return render(request, 'home_member.html')
-
-def game_catalogue(request):
-    game_list = BoardGame.objects.all().order_by('title')
-    return render(request, 'game_catalogue.html', {'games': game_list})
-
-def members(request):
-    member_list = User.objects.filter(is_staff=False)
-    return render(request, 'members.html', {'members': member_list})
-
-def rentals(request):
-    rental_list = Rental.objects.all().order_by('date_rented')
-    return render(request, 'rentals.html', {'rentals': rental_list})
-
-def my_rentals(request):
-    return render(request, 'my_rentals.html')
-
 class CustomLoginView(LoginView):
     template_name="login.html"
 
@@ -36,3 +16,44 @@ class CustomLoginView(LoginView):
             return reverse_lazy('home_admin')
         
         return reverse_lazy('home_member')
+
+@login_required
+def home_admin(request):
+    if not request.user.is_staff: # Checks if user is an admin and redirects them to the appropriate home page if they are not.
+        return redirect('home_member')
+    return render(request, 'home_admin.html')
+
+@login_required
+def home_member(request):
+    if request.user.is_staff: # Checks if user is an admin and redirects them to the appropriate home page if they are.
+        return redirect('home_admin')
+    return render(request, 'home_member.html')
+
+@login_required
+def game_catalogue(request):
+    game_list = BoardGame.objects.all().order_by('title')
+    return render(request, 'game_catalogue.html', {'games': game_list})
+
+@login_required
+def members(request):
+    if not request.user.is_staff: # Checks if user is an admin and redirects them to the appropriate home page if they are not.
+        return redirect('home_member')
+
+    member_list = User.objects.filter(is_staff=False)
+    return render(request, 'members.html', {'members': member_list})
+
+@login_required
+def rentals(request):
+    if not request.user.is_staff: # Checks if user is an admin and redirects them to the appropriate home page if they are not.
+        return redirect('home_member')
+
+    rental_list = Rental.objects.all().order_by('date_rented')
+    return render(request, 'rentals.html', {'rentals': rental_list})
+
+@login_required
+def my_rentals(request):
+    if request.user.is_staff: # Checks if user is an admin and redirects them to the appropriate home page if they are.
+        return redirect('home_admin')
+
+    return render(request, 'my_rentals.html')
+
