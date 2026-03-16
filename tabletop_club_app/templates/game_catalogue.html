@@ -21,6 +21,7 @@
                         <th>Players</th>
                         <th>Playtime</th>
                         <th>Quantity</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,6 +33,14 @@
                             <td>{{ game.min_players }} - {{ game.max_players }}</td>
                             <td>{{ game.playtime_minutes }} minutes</td>
                             <td>{{ game.quantity }}</td>
+                            <td>
+                            {% if user.is_staff %}
+                                <a href="{% url 'edit_board_game' game.pk %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                <a href="{% url 'delete_board_game' game.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                            {% else %}
+                            <a href="#" class="btn btn-sm btn-outline-primary">Rent</a>
+                            {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

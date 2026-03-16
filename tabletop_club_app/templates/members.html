@@ -17,6 +17,7 @@
                         <th>Username</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,6 +27,12 @@
                             <td>{{ member.username }}</td>
                             <td>{{ member.first_name }} {{ member.last_name }}</td>
                             <td>{{ member.email }}</td>
+                            <td>
+                            {% if user.is_staff %}
+                                <a href="{% url 'edit_member' member.pk %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                <a href="{% url 'delete_member' member.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                            {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

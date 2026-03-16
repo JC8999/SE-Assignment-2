@@ -36,4 +36,8 @@ urlpatterns = [
     # CRUD Forms
     path("create_member/", views.create_member, name="create_member"),
     path("create_board_game/", views.create_board_game, name="create_board_game"),
+    path("edit_member/<int:pk>/", views.edit_member, name="edit_member"),
+    path("edit_board_game/<int:pk>/", views.edit_board_game, name="edit_board_game"),
+    path("delete_member/<int:pk>/", views.delete_member, name="delete_member"),
+    path("delete_board_game/<int:pk>/", views.delete_board_game, name="delete_board_game"),
 ]

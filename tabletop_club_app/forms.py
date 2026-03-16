@@ -14,3 +14,8 @@ class BoardGameCreationForm(forms.ModelForm):
     class Meta:
         model = BoardGame
         fields = ['title', 'category', 'min_players', 'max_players', 'playtime_minutes', 'quantity']
+
+class MemberEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ["username", "first_name", "last_name", "email"]

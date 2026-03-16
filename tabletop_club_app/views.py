@@ -2,14 +2,14 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from .forms import MemberCreationForm, BoardGameCreationForm
+from .forms import MemberCreationForm, BoardGameCreationForm, MemberEditForm
 from .models import BoardGame, Rental
 
 # Create your views here.
 class CustomLoginView(LoginView):
-    template_name="login.html"
+    template_name='login.html'
 
     def get_success_url(self):
         user=self.request.user
@@ -75,12 +75,61 @@ def create_member(request):
     
 @staff_member_required
 def create_board_game(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = BoardGameCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("game_catalogue")
+            return redirect('game_catalogue')
     else:
         form = BoardGameCreationForm()
 
-    return render(request, "create_board_game.html", {"form": form})
+    return render(request, 'create_board_game.html', {'form': form})
+
+@staff_member_required
+def edit_member(request, pk):
+    member = get_object_or_404(User, pk=pk)
+
+    if request.method == 'POST':
+        form = MemberEditForm(request.POST, instance=member)
+        if form.is_valid():
+            form.save()
+            return redirect('members')
+    else:
+        form = MemberEditForm(instance=member)
+
+    return render(request, 'edit_member.html', {'form': form, 'member': member})
+
+@staff_member_required
+def edit_board_game(request, pk):
+    game = get_object_or_404(BoardGame, pk=pk)
+
+    if request.method == 'POST':
+        form = BoardGameCreationForm(request.POST, instance=game)
+        if form.is_valid():
+            form.save()
+            return redirect('game_catalogue')
+    
+    else:
+        form = BoardGameCreationForm(instance=game)
+
+    return render(request, 'edit_board_game.html', {'form': form, 'game': game})
+
+@staff_member_required
+def delete_member(request, pk):
+    member = get_object_or_404(User, pk=pk)
+
+    if request.method == 'POST':
+        member.delete()
+        return redirect('members')
+
+    return render(request, 'delete_member.html', {'member': member})
+
+@staff_member_required
+def delete_board_game(request, pk):
+    game = get_object_or_404(BoardGame, pk=pk)
+
+    if request.method == 'POST':
+        game.delete()
+        return redirect('game_catalogue')
+
+    return render(request, 'delete_board_game.html', {'game': game})
