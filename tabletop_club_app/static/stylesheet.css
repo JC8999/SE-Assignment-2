@@ -353,3 +353,56 @@ tbody tr:last-child {
 .member-card-button:hover {
     background-color: var(--secondary);
 }
+
+/* ====== Login ====== */
+/* Center the login form */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 14px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+/* Form fields */
+.login-field {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+/* Login button */
+.login-button {
+    width: 100%;
+    padding: 11px;
+    border: none;
+    border-radius: 6px;
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.login-button:hover {
+    background: var(--secondary);
+}
+
+/* Error message */
+.login-error {
+    background: #ffe5e5;
+    color: var(--danger);
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
