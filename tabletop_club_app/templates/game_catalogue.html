@@ -8,7 +8,7 @@
             <div class="game_header_table d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
                 <h3 class="mb-0">Board Games</h3>
                 {% if user.is_staff %}
-                <a class="button-pa" href="{% url 'create_board_game' %}">+ Add Board Game</a>
+                <a class="btn-add" href="{% url 'create_board_game' %}">+ Add Board Game</a>
                 {% endif %}
             </div>
     {% if games %}
@@ -35,10 +35,10 @@
                             <td>{{ game.quantity }}</td>
                             <td>
                             {% if user.is_staff %}
-                                <a href="{% url 'edit_board_game' game.pk %}" class="btn btn-sm btn-outline-secondary">Edit</a>
-                                <a href="{% url 'delete_board_game' game.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                                <a href="{% url 'edit_board_game' game.pk %}" class="btn-primary">Edit</a>
+                                <a href="{% url 'delete_board_game' game.pk %}" class="btn-secondary">Delete</a>
                             {% else %}
-                            <a href="#" class="btn btn-sm btn-outline-primary">Rent</a>
+                            <a href="#" class="btn-primary">Rent</a>
                             {% endif %}
                             </td>
                         </tr>

@@ -9,6 +9,7 @@
     --success-secondary: #246C44; /* used for interactions such as hover */
     --danger: #E63946; /* used for destructive actions such as deletion and overdue */
     --danger-secondary: #C52834; /* used for interactions such as hover */
+    --danger-bg: #ffe5e5; /* used for background on error messages */
     --text: #2B2B2B;
     --shadow: 0 6px 12px rgba(0,0,0,0.12);
 }
@@ -83,6 +84,51 @@ h1, h2, h3, h4, h5 {
     .main_body {
         margin-left: 240px;
     }
+}
+
+/* ====== Buttons ====== */
+/* Primary action button */
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background: var(--secondary);
+}
+
+/* Secondary button */
+.btn-secondary {
+    background: var(--danger);
+    color: #333;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.btn-secondary:hover {
+    background: var(--danger-secondary);
+}
+
+/* Add Button */
+.btn-add {
+    background: var(--success);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.btn-add:hover {
+    background: var(--success-secondary);
 }
 
 /* ====== SIDEBAR ====== */
@@ -354,6 +400,70 @@ tbody tr:last-child {
     background-color: var(--secondary);
 }
 
+/* ====== CRUD Forms ====== */
+/* Form container */
+.form-container {
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+/* Form inputs */
+.create-form input,
+.create-form select,
+.create-form textarea {
+    width: 100%;
+    padding: 7px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+}
+
+/* Input focus */
+.create-form input:focus,
+.create-form select:focus,
+.create-form textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+/* Labels */
+.form-label {
+    width: 140px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.form-field {
+    flex: 1;
+}
+
+/* Error styling */
+/* used for CRUD forms and login forms */
+.form-error {
+    background: var(--danger-bg);
+    color: var(--danger);
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.form-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+
 /* ====== Login ====== */
 /* Center the login form */
 .login-container {
@@ -389,20 +499,9 @@ tbody tr:last-child {
     background: var(--primary);
     color: white;
     font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s;
 }
 
 .login-button:hover {
     background: var(--secondary);
 }
 
-/* Error message */
-.login-error {
-    background: #ffe5e5;
-    color: var(--danger);
-    padding: 8px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    font-size: 14px;
-}

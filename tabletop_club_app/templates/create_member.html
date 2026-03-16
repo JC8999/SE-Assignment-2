@@ -3,9 +3,100 @@
 {% block title %}Create Member{% endblock %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Create Member</button>
-</form>
+
+<div class="form-container">
+
+    <h2>Add Member</h2>
+
+    <form method="post" class="create-form">
+        {% csrf_token %}
+
+        <!-- Displays model validation errors -->
+        {% if form.non_field_errors %}
+            <div class="form-error">
+                {{ form.non_field_errors|striptags }}
+            </div>
+        {% endif %}
+
+        <!-- Username -->
+        <div class="form-row">
+            <label class="form-label">Username</label>
+            <div class="form-field">
+                {{ form.username }}
+                {% if form.username.errors %}
+                    <div class="form-error">{{ form.username.errors|striptags }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- First Name -->
+        <div class="form-row">
+            <label class="form-label">First Name</label>
+            <div class="form-field">
+                {{ form.first_name }}
+                {% if form.first_name.errors %}
+                    <div class="form-error">{{ form.first_name.errors|striptags }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-row">
+            <label class="form-label">Last Name</label>
+            <div class="form-field">
+                {{ form.last_name }}
+                {% if form.last_name.errors %}
+                    <div class="form-error">{{ form.last_name.errors|striptags }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-row">
+            <label class="form-label">Email</label>
+            <div class="form-field">
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <div class="form-error">{{ form.email.errors|striptags }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-row">
+            <label class="form-label">Password</label>
+            <div class="form-field">
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                    <div class="form-error">{{ form.password1.errors|striptags }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-row">
+            <label class="form-label">Confirm Password</label>
+            <div class="form-field">
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                    <div class="form-error">{{ form.password2.errors|striptags }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">
+                Save
+            </button>
+
+            <a href="{% url 'members' %}" class="btn-secondary">
+                Cancel
+            </a>
+        </div>
+
+    </form>
+
+</div>
+
 {% endblock %}
