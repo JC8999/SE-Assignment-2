@@ -7,7 +7,7 @@
 
 <form method="post">
     {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Delete</button>
-    <a href="{% url 'game_catalogue' %}" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn-secondary">Delete</button>
+    <a href="{% url 'game_catalogue' %}" class="btn-primary">Cancel</a>
 </form>
 {% endblock %}
