@@ -245,93 +245,68 @@ h1, h2, h3, h4, h5 {
 }
 
 /* ======  TABLES ====== */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: var(--card);
-    color: var(--text-main);
-    border: 2px solid var(--primary);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-}
 
-th,
-td {
-    padding: 1rem;
-    text-align: left;
-    vertical-align: middle;
-}
-
-td {
-    min-height: 36px;
-}
-
-thead {
-    background-color: var(--primary);
-    position: sticky;
-    top: 0;
-    z-index: 1;
-}
-
-thead th {
-    color: #ffffff;
-    font-family: "Fredoka", sans-serif;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    border-bottom: 2px solid var(--primary);
-}
-
-tbody tr:nth-child(even) {
-    background-color: rgba(42, 111, 151, 0.06);
-}
-
-tbody tr:hover {
-    background-color: rgba(62, 152, 255, 0.183);
-}
-
-tbody tr:last-child {
-    border-bottom: none;
-}
 
 /* ====== RECORD CONTAINERS ====== */
 /* used for styling the various record tables */
-.game_body_table,
-.member_body_table,
-.rental_body_table {
+.table-wrapper {
     width: 95%;
+    margin: 0.8rem auto;
     background-color: var(--card);
-    border-radius: .6rem;
-    margin: .8rem auto;
+    border: 2px solid var(--primary);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.table_scroll {
     overflow: auto;
     max-height: 60vh;
 }
 
-.game_body_table table,
-.member_body.table,
-.rental_body_table table {
-    min-width: 700px;
+.table-wrapper table {
     width: 100%;
+    min-width: 700px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: transparent;
+    color: var(--text)
 }
 
-.game_body_table th,
-.game_body_table td,
-.member_body_table th,
-.member_body_table td,
-.rental_body_table th,
-.rental_body_table td {
+.table-wrapper th,
+.table-wrapper td {
+    padding: 1rem;
+    text-align: left;
+    vertical-align: middle;
     min-width: 120px;
     white-space: nowrap;
 }
 
-/* last column is wider for action buttons */
-.game_body_table th:last-child,
-.game_body_table td:last-child,
-.member_body_table th:last-child,
-.member_body_table td:last-child,
-.rental_body_table th:last-child,
-.rental_body_table td:last-child {
+.table-wrapper td {
+    min-height: 36px;
+}
+
+.table-wrapper th:last-child,
+.table-wrapper td:last-child {
     min-width: 200px;
+}
+
+.table-wrapper thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: var(--primary);
+    color: #ffffff;
+    font-family: "Fredoka", sans-serif;
+    font-weight: 600;
+}
+
+.table-wrapper tbody tr:nth-child(even) td {
+    background-color: rgba(42, 111, 151, 0.06);
+}
+
+.table-wrapper tbody tr:hover {
+    background-color: rgba(62, 152, 255, 0.183);
 }
 
 /* ====== HOME PAGE CARDS ====== */
@@ -504,4 +479,3 @@ tbody tr:last-child {
 .login-button:hover {
     background: var(--secondary);
 }
-
