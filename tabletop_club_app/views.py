@@ -9,16 +9,18 @@ from django.urls import reverse_lazy
 from .forms import MemberCreationForm, BoardGameCreationForm, MemberEditForm
 from .models import BoardGame, Rental
 
-# Create your views here.
+# Custom login view used to automatically redirect to the appropriate home page depending on which user role is authenticated.
 class CustomLoginView(LoginView):
     template_name='login.html'
 
     def get_success_url(self):
         user=self.request.user
 
+        # Redirects to the admin homepage if the user is an admin.
         if user.is_staff:
             return reverse_lazy('home_admin')
         
+        # Redirects to the member homepage if the user is not an admin.
         return reverse_lazy('home_member')
 
 # ====== Views ====== #
@@ -63,30 +65,35 @@ def my_rentals(request):
     return render(request, 'my_rentals.html')
 
 # ====== Form Views ====== #
+# Create Member
 @staff_member_required
 def create_member(request):
     if request.method == 'POST':
         form = MemberCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Member created successfully.')
             return redirect('members')
     else:
         form = MemberCreationForm()
 
     return render(request, 'create_member.html', {'form': form})
-    
+
+# Create Board Game
 @staff_member_required
 def create_board_game(request):
     if request.method == 'POST':
         form = BoardGameCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Board Game created successfully.')
             return redirect('game_catalogue')
     else:
         form = BoardGameCreationForm()
 
     return render(request, 'create_board_game.html', {'form': form})
 
+# Edit Member
 @staff_member_required
 def edit_member(request, pk):
     member = get_object_or_404(User, pk=pk)
@@ -95,12 +102,14 @@ def edit_member(request, pk):
         form = MemberEditForm(request.POST, instance=member)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Member details updated successfully.')
             return redirect('members')
     else:
         form = MemberEditForm(instance=member)
 
     return render(request, 'edit_member.html', {'form': form, 'member': member})
 
+# Edit Board Game
 @staff_member_required
 def edit_board_game(request, pk):
     game = get_object_or_404(BoardGame, pk=pk)
@@ -109,6 +118,7 @@ def edit_board_game(request, pk):
         form = BoardGameCreationForm(request.POST, instance=game)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Board Game details updated successfully.')
             return redirect('game_catalogue')
     
     else:
@@ -116,6 +126,7 @@ def edit_board_game(request, pk):
 
     return render(request, 'edit_board_game.html', {'form': form, 'game': game})
 
+# Delete Member
 @staff_member_required
 def delete_member(request, pk):
     member = get_object_or_404(User, pk=pk)
@@ -134,6 +145,7 @@ def delete_member(request, pk):
 
     return render(request, 'delete_member.html', {'member': member})
 
+# Delete Board Game
 @staff_member_required
 def delete_board_game(request, pk):
     game = get_object_or_404(BoardGame, pk=pk)
