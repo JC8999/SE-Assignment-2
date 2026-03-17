@@ -245,10 +245,6 @@ h1, h2, h3, h4, h5 {
 }
 
 /* ======  TABLES ====== */
-
-
-/* ====== RECORD CONTAINERS ====== */
-/* used for styling the various record tables */
 .table-wrapper {
     width: 95%;
     margin: 0.8rem auto;
@@ -307,6 +303,11 @@ h1, h2, h3, h4, h5 {
 
 .table-wrapper tbody tr:hover {
     background-color: rgba(62, 152, 255, 0.183);
+}
+
+.row-danger td {
+    background-color: var(--danger-bg);
+    color: var(--danger);
 }
 
 /* ====== HOME PAGE CARDS ====== */
