@@ -7,6 +7,7 @@
     --secondary: #6BAED6; /* used for interactions such as hover*/
     --success: #2E8B57; /* used for positive actions such as confirmation */
     --success-secondary: #246C44; /* used for interactions such as hover */
+    --success-bg: #e6f4ea; /* used for background on success messages */
     --danger: #E63946; /* used for destructive actions such as deletion and overdue */
     --danger-secondary: #C52834; /* used for interactions such as hover */
     --danger-bg: #ffe5e5; /* used for background on error messages */
@@ -479,4 +480,36 @@ h1, h2, h3, h4, h5 {
 
 .login-button:hover {
     background: var(--secondary);
+}
+
+/* ====== Messages ====== */
+/* Container to center the message */
+.message-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Message style */
+.status-message {
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    min-width: 300px;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+/* Success message */
+.status-message.success {
+    background-color: #e6f4ea;
+    color: var(--success);
+}
+
+/* Error message */
+.status-message.error {
+    background-color: var(--danger-bg);
+    color: var(--danger);
 }

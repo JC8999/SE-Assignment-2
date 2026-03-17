@@ -1,7 +1,9 @@
+from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
+from django.db.models.deletion import ProtectedError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from .forms import MemberCreationForm, BoardGameCreationForm, MemberEditForm
@@ -119,8 +121,16 @@ def delete_member(request, pk):
     member = get_object_or_404(User, pk=pk)
 
     if request.method == 'POST':
-        member.delete()
-        return redirect('members')
+        try:
+            member.delete()
+            messages.success(request, 'Member deleted successfully.')
+            return redirect('members')
+        except ProtectedError:
+            messages.error(
+                request,
+                'This member cannot be deleted because they have active or related rentals.'
+            )
+            return redirect('members')
 
     return render(request, 'delete_member.html', {'member': member})
 
@@ -129,7 +139,15 @@ def delete_board_game(request, pk):
     game = get_object_or_404(BoardGame, pk=pk)
 
     if request.method == 'POST':
-        game.delete()
-        return redirect('game_catalogue')
+        try:
+            game.delete()
+            messages.success(request, 'Board game deleted successfully.')
+            return redirect('game_catalogue')
+        except ProtectedError:
+            messages.error(
+                request,
+                'This board game cannot be deleted because it has active rentals.'
+            )
+            return redirect('game_catalogue')
 
     return render(request, 'delete_board_game.html', {'game': game})

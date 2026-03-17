@@ -191,6 +191,15 @@
                         <header class="mb-3 text-center">
                             <h1 class="display-6"><strong>{% block header %}{% endblock %}</strong></h1>
                         </header>
+
+                        {% if messages %}
+                        <div class="message-container">
+                            {% for message in messages %}
+                                <div class="status-message {{ message.tags }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        
                         <main>
                             {% block content %}{% endblock %}
                         </main>
