@@ -62,7 +62,8 @@ def my_rentals(request):
     if request.user.is_staff: # Checks if user is an admin and redirects them to the appropriate home page if they are.
         return redirect('home_admin')
 
-    return render(request, 'my_rentals.html')
+    rental_list = Rental.objects.filter(borrower=request.user).select_related('board_game')
+    return render(request, 'my_rentals.html', {'rentals': rental_list})
 
 # ====== Form Views ====== #
 # Create Member
