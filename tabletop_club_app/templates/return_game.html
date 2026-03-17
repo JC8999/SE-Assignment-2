@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Return Board Game{% endblock %}
+
+{% block content %}
+<p>Are you sure you want to return <strong>{{ rental.board_game.title }}</strong>?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn-secondary">Return</button>
+    <a href="{% url 'my_rentals' %}" class="btn-primary">Cancel</a>
+</form>
+{% endblock %}

@@ -28,7 +28,7 @@
                         <td>{{ rental.date_rented }}</td>
                         <td>{{ rental.due_date }}</td>
                         <td>
-                            <a href="#" class="btn-secondary">Return</a>
+                            <a href="{% url 'return_game' rental.pk %}" class="btn-secondary">Return</a>
                         </td>
                     </tr>
                 {% endfor %}

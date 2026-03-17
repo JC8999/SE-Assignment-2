@@ -170,7 +170,8 @@ def delete_board_game(request, pk):
 # Rent Board Game
 @login_required
 def rent_game(request, pk):
-    if request.user.is_staff: #Prevents admins from renting a game
+    # Prevents admins from renting a game
+    if request.user.is_staff:
         messages.error(request, 'Admins cannot rent board games.')
         return redirect('game_catalogue')
 
@@ -193,3 +194,21 @@ def rent_game(request, pk):
             return redirect('game_catalogue')
 
     return redirect('game_catalogue')
+
+# Return Board Game
+@login_required
+def return_game(request, pk):
+    rental = get_object_or_404(Rental, pk=pk)
+
+    # Members can only return their own rentals
+    if rental.borrower != request.user:
+        messages.error(request, 'You cannot return this rental.')
+        return redirect('my_rentals')
+
+    if request.method == 'POST':
+        game_title = rental.board_game.title
+        rental.delete()
+        messages.success(request, f'You returned "{game_title}".')
+        return redirect('my_rentals')
+
+    return render(request, 'return_game.html', {'rental': rental})
