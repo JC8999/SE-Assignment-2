@@ -84,6 +84,7 @@
                     <hr>
 
                     <div class="sidebar-footer">
+                        <p>User: {{ request.user.username }}</p>
                         <form method="post" action="{% url 'logout' %}">
                             {% csrf_token %}
                             <button type="submit" class="sidebar-link logout-link logout-button">
@@ -174,6 +175,7 @@
                         <hr>
 
                         <div class="sidebar-footer">
+                        <p>User: {{ request.user.username }}</p>
                         <form method="post" action="{% url 'logout' %}">
                             {% csrf_token %}
                             <button type="submit" class="sidebar-link logout-link logout-button">
