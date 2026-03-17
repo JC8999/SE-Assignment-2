@@ -3,6 +3,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
+from django.core.exceptions import ValidationError
 from django.db.models.deletion import ProtectedError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -164,3 +165,31 @@ def delete_board_game(request, pk):
             return redirect('game_catalogue')
 
     return render(request, 'delete_board_game.html', {'game': game})
+
+# ====== Rental Views ======
+# Rent Board Game
+@login_required
+def rent_game(request, pk):
+    if request.user.is_staff: #Prevents admins from renting a game
+        messages.error(request, 'Admins cannot rent board games.')
+        return redirect('game_catalogue')
+
+    game = get_object_or_404(BoardGame, pk=pk)
+
+    if request.method == 'POST':
+        rental = Rental(
+            borrower=request.user,
+            board_game=game
+        )
+
+        try:
+            rental.full_clean() # Runs to ensure rental rules are enforced
+            rental.save()
+            messages.success(request, f'You have rented "{game.title}".')
+            return redirect('my_rentals')
+        except ValidationError as e: # Used to display error messages from the rental rules
+            for error in e.messages:
+                messages.error(request, error)
+            return redirect('game_catalogue')
+
+    return redirect('game_catalogue')
