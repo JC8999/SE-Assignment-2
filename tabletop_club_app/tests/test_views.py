@@ -33,6 +33,14 @@ class AuthenticationTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
 
+    def test_members_page_denies_non_admin_access(self):
+        # Test to verify that a non-admin user is denied access to the members page.
+        self.client.login(username='member', password='testpassword')
+
+        response = self.client.get(reverse('members'))
+
+        self.assertNotEqual(response.status_code, 200)
+
 class CreateViewTests(TestCase):
     def setUp(self):
         # Test data to use in the create view tests.
@@ -42,7 +50,7 @@ class CreateViewTests(TestCase):
             is_staff=True
             )
     def test_create_board_game_post(self):
-        # Test to verify that that submitting valid data creates an object and redirects.
+        # Test to verify that submitting valid data creates an object and redirects.
         self.client.login(username='admin', password='testpassword')
 
         form_data = {
@@ -58,3 +66,21 @@ class CreateViewTests(TestCase):
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(BoardGame.objects.count(), 1)
+
+    def test_create_board_game_invalid_post_does_not_create_object(self):
+        # Test to verify that submitting invalid data does not create an object and returns the form with errors.
+        self.client.login(username='admin', password='testpassword')
+
+        form_data = {
+            'title': '', # Invalid title
+            'category': 'strategy',
+            'min_players': 6, # Invalid min_players
+            'max_players': 2,
+            'playtime_minutes': 90,
+            'quantity': 5
+        }
+
+        response = self.client.post(reverse('create_board_game'), data=form_data)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(BoardGame.objects.count(), 0)
