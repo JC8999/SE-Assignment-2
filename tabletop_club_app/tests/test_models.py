@@ -30,13 +30,14 @@ class BoardGameModelTests(TestCase):
             playtime_minutes=30,
             quantity=2,
             )
+        
     def test_board_game_validates_min_players_not_greater_than_max_players(self):
         # Test to verify that the minimum number of players cannot exceed the maximum number of players.
         # The test passes if the expected validation error is raised.
         game = BoardGame(
             title='Invalid Game',
             category=BoardGame.Category.STRATEGY,
-            min_players=5,
+            min_players=5, # Minimum players is higher than maximum.
             max_players=4,
             playtime_minutes=60,
             quantity=1,
@@ -53,9 +54,9 @@ class BoardGameModelTests(TestCase):
     def test_available_copies_and_is_available_when_no_rentals(self):
         # Test to verify that a board game with no rentals yet should report that all copies available.
         # The test passes if the game is marked as available while having 2 copies and no active rentals.
-        self.assertEqual(self.test_game.active_rentals_count, 0) # Checks that no rentals exist
-        self.assertEqual(self.test_game.available_copies, 2) # Checks that there are 2 copies available
-        self.assertTrue(self.test_game.is_available) # Checks that the game is available to rent
+        self.assertEqual(self.test_game.active_rentals_count, 0)
+        self.assertEqual(self.test_game.available_copies, 2) 
+        self.assertTrue(self.test_game.is_available) 
 
     def test_available_copies_and_is_available_update_with_active_rentals(self):
         # Test to verify that that a game's availability updates correctly when a rental is created.

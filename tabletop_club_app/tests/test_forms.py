@@ -2,8 +2,8 @@ from django.test import TestCase
 from tabletop_club_app.forms import BoardGameCreationForm
 
 class BoardGameFormTest(TestCase):
-    # Test to verify that the board game creation forms accepts correct data.
     def test_valid_board_game_form(self):
+        # Test to verify that the board game creation forms accepts correct data.
         form_data = {
             'title': 'Monopoly',
             'category': 'strategy',
