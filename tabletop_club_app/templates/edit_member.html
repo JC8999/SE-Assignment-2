@@ -20,7 +20,7 @@
 
         <!-- Username -->
         <div class="form-row">
-            <label class="form-label">Username</label>
+            <label for="id_username" class="form-label">Username</label>
             <div class="form-field">
                 {{ form.username }}
                 {% if form.username.errors %}
@@ -31,7 +31,7 @@
 
         <!-- First Name -->
         <div class="form-row">
-            <label class="form-label">First Name</label>
+            <label for="id_first_name" class="form-label">First Name</label>
             <div class="form-field">
                 {{ form.first_name }}
                 {% if form.first_name.errors %}
@@ -42,7 +42,7 @@
 
         <!-- Last Name -->
         <div class="form-row">
-            <label class="form-label">Last Name</label>
+            <label for="id_last_name" class="form-label">Last Name</label>
             <div class="form-field">
                 {{ form.last_name }}
                 {% if form.last_name.errors %}
@@ -53,7 +53,7 @@
 
         <!-- Email -->
         <div class="form-row">
-            <label class="form-label">Email</label>
+            <label for="id_email" class="form-label">Email</label>
             <div class="form-field">
                 {{ form.email }}
                 {% if form.email.errors %}
