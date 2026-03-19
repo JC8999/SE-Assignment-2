@@ -20,7 +20,7 @@
 
         <!-- Board Game Title -->
         <div class="form-row">
-            <label class="form-label">Title</label>
+            <label for="id_title" class="form-label">Title</label>
             <div class="form-field">
                 {{ form.title }}
                 {% if form.title.errors %}
@@ -31,7 +31,7 @@
 
         <!-- Category -->
         <div class="form-row">
-            <label class="form-label">Category</label>
+            <label for="id_category" class="form-label">Category</label>
             <div class="form-field">
                 {{ form.category }}
                 {% if form.category.errors %}
@@ -42,7 +42,7 @@
 
         <!-- Minimum Players -->
         <div class="form-row">
-            <label class="form-label">Minimum Players</label>
+            <label for="id_min_players" class="form-label">Minimum Players</label>
             <div class="form-field">
                 {{ form.min_players }}
                 {% if form.min_players.errors %}
@@ -53,7 +53,7 @@
 
         <!-- Maximum Players -->
         <div class="form-row">
-            <label class="form-label">Maximum Players</label>
+            <label for="id_max_players" class="form-label">Maximum Players</label>
             <div class="form-field">
                 {{ form.max_players }}
                 {% if form.max_players.errors %}
@@ -64,7 +64,7 @@
 
         <!-- Playtime in Minutes -->
         <div class="form-row">
-            <label class="form-label">Playtime (Minutes)</label>
+            <label for="id_playtime_minutes" class="form-label">Playtime (Minutes)</label>
             <div class="form-field">
                 {{ form.playtime_minutes }}
                 {% if form.playtime_minutes.errors %}
@@ -75,7 +75,7 @@
 
         <!-- Quantity -->
         <div class="form-row">
-            <label class="form-label">Quantity</label>
+            <label for="id_quantity" class="form-label">Quantity</label>
             <div class="form-field">
                 {{ form.quantity }}
                 {% if form.quantity.errors %}
